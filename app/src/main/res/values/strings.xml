@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">News Feed app</string>
+    <!-- Name of the app -->
+    <string name="app_name">News Feed App</string>
+
+    <!-- Empty state string -->
+    <string name="empty_state_string">No search results found.</string>
+
+    <!-- No internet connection string -->
+    <string name="no_internet_connection">No internet connection.</string>
 </resources>

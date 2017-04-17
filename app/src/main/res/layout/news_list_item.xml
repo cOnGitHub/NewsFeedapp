@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:paddingLeft="@dimen/default_padding_left"
+        android:paddingRight="@dimen/default_padding_right"
+        android:paddingTop="@dimen/list_item_padding_top">
+
+        <TextView
+            android:id="@+id/publication_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-02-02"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/colorTextSecondary"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/section_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Politics"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/colorTextSecondary"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title_of_news_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:paddingBottom="@dimen/list_item_padding_bottom"
+        android:paddingLeft="@dimen/default_padding_left"
+        android:paddingRight="@dimen/default_padding_right"
+        android:text="A story from the political disturbance of middle Amazonas area during the 2010s"
+        android:textColor="@color/colorTextPrimary" />
+
+</LinearLayout>

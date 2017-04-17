@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- colors for the app -->
+    <color name="colorPrimary">#3d501b</color>
+    <color name="colorPrimaryDark">#303913</color>
+    <color name="colorAccent">#832f8e</color>
+
+    <!-- colors for the background of the app and the list items -->
+    <color name="colorBackground">#bdd47d</color>
+    <color name="colorBackgroundLight">#e0d8a1</color>
+
+    <!-- colors for the text of the list items -->
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#757575</color>
+    <color name="colorTextExtraLight">#BDBDBD</color>
 </resources>
