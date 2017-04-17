@@ -5,11 +5,15 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     private static final int NEWS_LOADER_ID = 1;
 
     // HTTP Search string
-    private String httpSearchString = "http://content.guardianapis.com/search?q=culture&api-key=test";
+    // The query part of the string will be added later, e.g. "?q=culture&api-key=test"
+    private String httpSearchString = "http://content.guardianapis.com/search";
 
     // List view
     ListView mNewsListView;
@@ -119,8 +124,24 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String searchTerm = sharedPrefs.getString(
+                getString(R.string.settings_search_term_key),
+                getString(R.string.settings_search_term_default));
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default));
+
+        Uri baseUri = Uri.parse(httpSearchString);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("q", searchTerm);
+        uriBuilder.appendQueryParameter("page-size", "30");
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("api-key", "test");
+
         // return new NewsLoader object
-        return new NewsLoader(this, httpSearchString);
+        return new NewsLoader(this, uriBuilder.toString());
     }
 
     /**
@@ -152,4 +173,22 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // Clear the adapter
         mNewsAdapter.clear();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
